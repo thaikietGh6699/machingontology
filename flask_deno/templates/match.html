@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Match Ontology</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='match.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card p-4">
+        <h1 class="text-center mb-4">So Khớp Ontology</h1>
+        <form action="/match" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="input_file">Chọn File Đầu Vào:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="input_file"
+              name="input_file"
+              accept=".csv"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="model">Chọn Mô Hình:</label>
+            <select class="form-control" id="model" name="model">
+              <option value="LogisticRegression">Logistic Regression</option>
+              <option value="RandomForest">Random Forest</option>
+              <option value="XGBoost">XGBoost</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span>So khớp</span>
+          </button>
+        </form>
+
+        <!-- Hiển thị kết quả -->
+        {% if model_name %}
+        <div class="mt-4">
+          <h2>Kết Quả So Khớp</h2>
+          <h3>Sử dụng mô hình: {{ model_name }}</h3>
+          <p>Giá trị so khớp: {{ match_value }}</p>
+          <p>Số lượng thực thể khớp: {{ num_matched }}</p>
+          <p>Ontology nguồn: {{ O_S }}</p>
+          <p>Ontology đích: {{ O_T }}</p>
+          <p>Tỷ lệ tương ứng giữa 2 ontology: {{ jaccard_index }}%</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

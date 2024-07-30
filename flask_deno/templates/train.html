@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Train Model</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/static/train.css" />
+    <!-- Thay đổi dòng này -->
+  </head>
+  <body>
+    <div class="container">
+      <h1>Huấn Luyện Mô Hình</h1>
+      <form action="/train" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="config">Config YAML:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="config"
+            name="config"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="train_csv">Training CSV:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="train_csv"
+            name="train_csv"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="test_csv">Testing CSV:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="test_csv"
+            name="test_csv"
+            required
+          />
+        </div>
+        <div id="input">
+          <button type="submit" class="btn btn-primary">
+            Bắt đầu Huấn luyện
+          </button>
+        </div>
+      </form>
+
+      {% if results %}
+      <h2>Kết Quả Huấn Luyện:</h2>
+      {% if selected_model %}
+      <p>Mô hình được chọn để huấn luyện: {{ selected_model }}</p>
+      {% endif %}
+      <ul>
+        {% for result in results %}
+        <li>{{ result }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
